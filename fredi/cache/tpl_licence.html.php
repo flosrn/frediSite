@@ -19,10 +19,17 @@
 	foreach($rows as $row)
 	{
 		echo "<td>".$row['numLicence']."</td>";	
+<<<<<<< HEAD
 		echo "<td>".$row['Nom']."</td>";	
 		echo "<td>".$row['Prenom']."</td>";	
 		echo "<td>".$row['dateNaissance']."</td>";	
 		echo "<td>".$row['nomClub']."</td>";
+=======
+		echo "<td>".$row['nom']."</td>";	
+		echo "<td>".$row['prenom']."</td>";	
+		echo "<td>".$row['dateNaissance']."</td>";	
+		echo "<td>".$row['Nom']."</td>";
+>>>>>>> origin/master
 		echo "<td><a href='modifier.php?num=".$row['numLicence']."'><img src='img/crayon.ico' alt='Photo de montagne' width=24 height=24/></a></td>";	
 		echo "<td><a href='supprimer.php?num=".$row['numLicence']."'><img src='img/poubelle.png' alt='Photo de montagne' width=24 height=24/></a></td>";
 		echo "</tr>";
