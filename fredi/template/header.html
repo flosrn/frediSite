@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{S_USER_LANG}" xml:lang="{S_USER_LANG}">
+<head>
+<meta http-equiv="content-type" content="text/html; charset={S_CONTENT_ENCODING}" />
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-language" content="{S_USER_LANG}" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<title>{PAGE_TITLE} - {SITENAME}</title>
+<!-- BEGIN addstyle -->
+<link rel="stylesheet" href="{addstyle.HEAD_STYLESHEET}" media="all" type="text/css" />
+<!-- END addstyle -->
+</head>
+<body>
+<div id="header">
+	<h1>{L_LOGO}</h1>
+</div>
+<div id="leftmenu">
+<!-- IF MENU_LIST -->
+<ul>
+<!-- BEGIN menuloop -->
+	<li><!-- IF menuloop.CURRENT -->{menuloop.TEXT}<!-- ELSE --><a href="{menuloop.U_HREF}" title="{menuloop.INFO}">{menuloop.TEXT}</a><!-- ENDIF --></li>
+<!-- END menuloop -->
+</ul>
+<!-- ENDIF -->
+</div>
+<div id="content">
+	<h2>{PAGE_SUBTITLE}</h2>
