@@ -74,7 +74,7 @@ function login($pseudo, $mdp)
 				$_SESSION['connecter'] = 0; 
 			}
 			echo $message;
-return $message;
+
 }
 
 function inscription ()
@@ -126,7 +126,7 @@ function insertLigneDeFrait($noteDeFrais, $id_demandeur){
 	$con = base();	
        
         $sql = "insert into ligneFrais (date, trajet, km, coutTrajet, coutPeage, coutRepas, coutHebergement, coutTotal, idDemandeur) 
-        values (".$noteDeFrais->date.", '".$noteDeFrais->trajet."', ".$noteDeFrais->km.", ".$noteDeFrais->coutTrajet.", ".$noteDeFrais->coutPeage.", ".$noteDeFrais->coutRepas.", ".$noteDeFrais->coutHebergement.", ".$noteDeFrais->coutTotal.", ".$id_demandeur.")";
+        values ('".$noteDeFrais->date."', '".$noteDeFrais->trajet."', ".$noteDeFrais->km.", ".$noteDeFrais->coutTrajet.", ".$noteDeFrais->coutPeage.", ".$noteDeFrais->coutRepas.", ".$noteDeFrais->coutHebergement.", ".$noteDeFrais->coutTotal.", ".$id_demandeur.")";
 
 
         try {
@@ -209,7 +209,7 @@ function mesAdherents($id_demandeur)
 {
 	$con = base();
 
-	$sql = "select * from adherent a join club c where a.idClub = c.idClub and idDemandeur='".$id_demandeur."';";
+	$sql = "select numLicence, a.Nom, Prenom, dateNaissance, c.Nom as nomClub from adherent a join club c where a.idClub = c.idClub and idDemandeur='".$id_demandeur."';";
             try {
                 $res = $con->query($sql);
                 $rows = $res->fetchAll(PDO::FETCH_ASSOC);
