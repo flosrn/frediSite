@@ -90,13 +90,16 @@ function inscription ()
 	$con = base();
 	$message = "";
 
-
+		$nom = $_POST['nom'];
+		$prenom = $_POST['prenom'];
+		$rue = $_POST['rue'];
+		$CP = $_POST['CP'];
+		$ville = $_POST['ville'];
 	  $mail = $_POST['mail'];
 	  $mdp = $_POST['mdp'];
-	  $ligue = $_POST['ligue'];
 	  $mdp = sha1($_POST['mdp']);
-	  $test = "select mail from user";
-
+	  //$ligue = $_POST['ligue'];
+	  $test = "select * from demandeur";
 
 	  try {
 	      $restest = $con->query($test);
@@ -106,7 +109,7 @@ function inscription ()
 	  }
 		$exists=0;
 	  while($rows = $restest->fetch(PDO::FETCH_ASSOC)) {
-	      if(($mail == $rows['mail'])) {
+	      if(($mail == $rows['AdresseMail'])) {
 	          $exists = 1;
 	          break;
 	      }
@@ -114,19 +117,19 @@ function inscription ()
 
 	  if($exists != 1) {
 	      //On insère les données dans la table à travers une requête SQL
-	      $sql = "INSERT INTO user(mail, password, id_type, id_ligue)
-	                  VALUES ('$mail', '$mdp', '1', '$ligue')";
-
+	      $sql = "INSERT INTO demandeur(Nom, Prenom, Rue, CP, Ville, AdresseMail, motDePasse)
+	                  VALUES ('$nom', '$prenom', '$rue', '$CP', '$ville', '$mail', '$mdp')";
 	      try {
 	          $con->exec($sql);
-	          $message = $_POST['mail'] . " votre inscription a bien été prise en compte!";
+	          $message = $_POST['nom'] . " votre inscription a bien été prise en compte!";
 	      } catch (PDOException $e) {
 	          die("Erreur lors de la requête SQL: " . $e->getMessage());
 	      }
 	  }
 	  else {
-	      $message = "Le pseudo ou le mail est déja utilisé";
+	      $message = "Cette adresse mail est déja utilisée";
 	  }
+	  echo $message;
 }
 
 function insertLigneDeFrait($noteDeFrais, $id_demandeur){
