@@ -27,5 +27,5 @@ $template->set_filenames(array(
 
 $template->display('body');
 
-echo "test";
+echo "test2";
 ?>
