@@ -22,6 +22,8 @@ $id_demandeur = $_SESSION['id_demandeur'];
        <th>Repas</th>
        <th>Hebergement</th>
        <th>Total</th>
+       <th>Modifier</th>
+       <th>Supprimer</th>
    </tr>
    <tr>
 <?php 
@@ -38,6 +40,8 @@ foreach($rows as $row){
     echo "<td>".$row['coutRepas']."</td>";
     echo "<td>".$row['coutHebergement']."</td>";
     echo "<td>".$row['coutTotal']."</td>";
+	echo "<td><a href=''><img src='img/crayon.ico' alt='Photo de montagne' width=24 height=24/></a></td>";	
+	echo "<td><a href=''><img src='img/poubelle.png' alt='Photo de montagne' width=24 height=24/></a></td>";
 
    echo"</tr>";
 }  
