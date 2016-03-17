@@ -26,4 +26,6 @@ $template->set_filenames(array(
 	'body' => 'page1.html'));
 
 $template->display('body');
+
+echo "test";
 ?>
