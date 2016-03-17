@@ -5,7 +5,7 @@
 include ('dto/LigneFrai.class.php');
 include ('dto/Motif.class.php');
 
-
+ $id_demandeur = $_SESSION['connecter'];
 
 $submit = isset($_POST['submit']);
 if ($submit)
@@ -26,7 +26,7 @@ if ($submit)
 		$motif = new Motif();
 		$motif->libelle = ($_POST['motif']);
 
-		insertLigneDeFrait($noteDeFrais);
+		insertLigneDeFrait($noteDeFrais, $id_demandeur);
         insertMotif($motif);
         header('Location: Gerer_bordereau.php');
 		}
@@ -41,10 +41,10 @@ if ($submit)
             <p>
             	<div class="formLeft">
             	<label for="dateDeplacement">Date du déplacement</label><br />
-                <input type="text" value="" name="dateDeplacement" required="required" /><br /> 
+                <input type="date" value="" name="dateDeplacement" required="required" /><br /> 
                 <label for="motif" >motif</label><br />
                 <input type="text" value="" name="motif" required="required" /><br /> 
-                <label for="trajet">Trajet(prix)</label><br />
+                <label for="trajet">Trajet</label><br />
                 <input type="text" value="" name="trajet" required="required" /><br /> 
             	<label for="nbKM" >Nombre de kilometre</label><br />
                 <input type="integer" value="" name="nbKM" required="required" /><br />      
@@ -62,8 +62,7 @@ if ($submit)
                 <label for="coutTotal" >cout total</label><br />
                 <input type="integer" value="" name="coutTotal" required="required" /><br />
                 
-                <!--<label for="tarifKm" >Tarif kilométrique</label><br />
-                <input type="integer" value="" name="tarifKm" required="required" /><br />-->
+                
                 </div>
             </p>
 

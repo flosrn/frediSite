@@ -22,7 +22,8 @@
 <?php
 if ((isset($_POST['pseudo'])) && (isset($_POST['mdp']))) {
 	$login = $_POST['pseudo'];
-	$password =sha1($_POST['mdp']);
+	//$password =sha1($_POST['mdp']);
+	$password =$_POST['mdp'];
 }
 
 $submit = isset($_POST['submit']);

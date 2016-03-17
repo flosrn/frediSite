@@ -19,8 +19,8 @@
 	foreach($rows as $row)
 	{
 		echo "<td>".$row['numLicence']."</td>";	
-		echo "<td>".$row['nom']."</td>";	
-		echo "<td>".$row['prenom']."</td>";	
+		echo "<td>".$row['Nom']."</td>";	
+		echo "<td>".$row['Prenom']."</td>";	
 		echo "<td>".$row['dateNaissance']."</td>";	
 		echo "<td>".$row['Nom']."</td>";
 		echo "<td><a href='modifier.php?num=".$row['numLicence']."'><img src='img/crayon.ico' alt='Photo de montagne' width=24 height=24/></a></td>";	

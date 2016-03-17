@@ -50,7 +50,7 @@ function login($pseudo, $mdp)
 {
 	$con = base();
 
-	$sql = "select * from demandeur where AdresseMail='$pseudo' and motDePasse='$mdp'";
+	$sql = "select * from demandeur where adresseMail='$pseudo' and motDePasse='$mdp'";
             try {
                 $res = $con->query($sql);
                 $row = $res->fetch(PDO::FETCH_ASSOC);
@@ -58,24 +58,16 @@ function login($pseudo, $mdp)
                 die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
             }
             //on test la saisie
-
+		
             if ($pseudo == $row['AdresseMail'] && $mdp == $row['motDePasse']) {
                 $message = "<p>bravo vous etes connecter</p>";
                 $_SESSION['AdresseMail'] = $row['AdresseMail'];
-                $_SESSION['idDemandeur'] = $row['idDemandeur'];
-               // $_SESSION['id_type'] = $row['id_type'];
-				// $_SESSION['id_ligue'] = $row['id_ligue'];
+                $_SESSION['id_demandeur'] = $row['idDemandeur'];
+             
                 //definition du usertype
-                
-                if($_SESSION['id_type'] == 1){
+
 					$_SESSION['connecter'] = 1 ;
-                }
-
-                if($_SESSION['id_type'] == 2){
-					$_SESSION['connecter'] = 2 ;
-                }
-
-
+       
 			} else 
 			{
 				$message = "<p>Login ou mot de passe incorrecte</p>";
@@ -133,8 +125,8 @@ function insertLigneDeFrait($noteDeFrais, $id_demandeur){
 
 	$con = base();	
        
-        $sql = "insert into ligneFrais (date, trajet, km, coutTrajet, coutPeage, coutRepas, coutHebergement, coutTotal, id_demandeur) 
-        values (".$noteDeFrais->date.", ".$noteDeFrais->trajet.", ".$noteDeFrais->km.", ".$noteDeFrais->coutTrajet.", ".$noteDeFrais->coutPeage.", ".$noteDeFrais->coutRepas.", ".$noteDeFrais->coutHebergement.", ".$noteDeFrais->coutTotal.", ".$id_demandeur.")";
+        $sql = "insert into ligneFrais (date, trajet, km, coutTrajet, coutPeage, coutRepas, coutHebergement, coutTotal, idDemandeur) 
+        values (".$noteDeFrais->date.", '".$noteDeFrais->trajet."', ".$noteDeFrais->km.", ".$noteDeFrais->coutTrajet.", ".$noteDeFrais->coutPeage.", ".$noteDeFrais->coutRepas.", ".$noteDeFrais->coutHebergement.", ".$noteDeFrais->coutTotal.", ".$id_demandeur.")";
 
 
         try {
@@ -162,7 +154,7 @@ function insertMotif($motif){
 function lireLigneDeFrais($id_demandeur){
 	$con = base();
 
-	$sql = "select * from lignefrais a join motif b where a.id_motif = b.id_motif  and id_demandeur='".$id_demandeur."';";
+	$sql = "select * from lignefrais a join motif b where a.idMotif = b.idMotif  and idDemandeur='".$id_demandeur."';";
             try {
                 $res = $con->query($sql);
                 $rows = $res->fetchAll(PDO::FETCH_ASSOC);
@@ -176,7 +168,7 @@ function lireLigneDeFrais($id_demandeur){
  function countBoredereau($id_demandeur){
  	$con = base();
 
-	$sql = "select max(numBordereau) as nb from lignefrais where id_demandeur='".$id_demandeur."';";
+	$sql = "select max(numBordereau) as nb from lignefrais where idDemandeur='".$id_demandeur."';";
             try {
                 $res = $con->query($sql);
                 $row = $res->fetch(PDO::FETCH_ASSOC);
@@ -189,7 +181,7 @@ function lireLigneDeFrais($id_demandeur){
 function countCoutTotal($id_demandeur){
 	$con = base();
 
-	$sql = "select sum(coutTotal) as total from lignefrais a join motif b where a.id_motif = b.id_motif  and id_demandeur='".$id_demandeur."';";
+	$sql = "select sum(coutTotal) as total from lignefrais a join motif b where a.idMotif = b.idMotif  and idDemandeur='".$id_demandeur."';";
             try {
                 $res = $con->query($sql);
                 $row = $res->fetch(PDO::FETCH_ASSOC);
@@ -217,7 +209,7 @@ function mesAdherents($id_demandeur)
 {
 	$con = base();
 
-	$sql = "select * from adherent a join club c where a.id_club = c.id_club and id_demandeur='".$id_demandeur."';";
+	$sql = "select * from adherent a join club c where a.idClub = c.idClub and idDemandeur='".$id_demandeur."';";
             try {
                 $res = $con->query($sql);
                 $rows = $res->fetchAll(PDO::FETCH_ASSOC);
@@ -233,7 +225,7 @@ function insertAdherent($adherent, $id_demandeur)
 {
 	$con = base();	
        
-         $sql = "insert into adherent (numLicence, nom, prenom, dateNaissance, id_club, id_demandeur) 
+         $sql = "insert into adherent (numLicence, Nom, Prenom, dateNaissance, idClub, idDemandeur) 
         values (".$adherent->numLicence.", '".$adherent->nom."', '".$adherent->prenom."', ".$adherent->dateNaissance.", ".$adherent->idClub.", ".$id_demandeur.");";
  		
         try {

@@ -40,7 +40,7 @@ if ($submit)
 
 				<select name="club">
 				<?php foreach($rows as $row) { 
-				 echo "<option type='integer' value='".$row['id_club']."'>".$row['Nom']."</option>";
+				 echo "<option type='integer' value='".$row['idClub']."'>".$row['Nom']."</option>";
 				 } ?>
 				</select>        
                 </div>
