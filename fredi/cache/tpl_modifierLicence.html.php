@@ -6,7 +6,7 @@ include ('dto/Adherent.class.php');
 include ('dto/Club.class.php');
 
 $id_demandeur = $_SESSION['id_demandeur'];
-
+$id = $_GET['num'];
 $rows = mesClub();
 
 $submit = isset($_POST['submit']);
@@ -19,7 +19,7 @@ if ($submit)
         $adherent->dateNaissance = ($_POST['dateNaissance']);
         $adherent->idClub = ($_POST['club']);
 
-		insertAdherent($adherent, $id_demandeur);
+		modifierAdherent($adherent, $id_demandeur);
         
         header('Location: licence.php');
 	}
@@ -31,7 +31,7 @@ if ($submit)
 	<form id="formulaire" action="#" method="post">
             <p>
             	<label for="numLicence">Numero de licence</label><br />
-                <input type="integer" value="" name="numLicence" required="required" /><br /> 
+                <input type="integer" value="<?php ?>" name="numLicence" required="required" /><br /> 
                 <label for="nom" >Nom</label><br />
                 <input type="text" value="" name="nom" required="required" /><br /> 
                 <label for="prenom">Prénom</label><br />

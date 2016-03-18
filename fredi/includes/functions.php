@@ -212,7 +212,7 @@ function mesAdherents($id_demandeur)
 {
 	$con = base();
 
-	$sql = "select numLicence, a.Nom, Prenom, dateNaissance, c.Nom as nomClub from adherent a join club c where a.idClub = c.idClub and idDemandeur='".$id_demandeur."';";
+	$sql = "select numLicence, a.Nom, Prenom, dateNaissance, c.Nom as nomClub, a.id from adherent a join club c where a.idClub = c.idClub and idDemandeur='".$id_demandeur."';";
             try {
                 $res = $con->query($sql);
                 $rows = $res->fetchAll(PDO::FETCH_ASSOC);
@@ -236,6 +236,17 @@ function insertAdherent($adherent, $id_demandeur)
         } catch (PDOException $e) {
             die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
         }
+}
+
+function supprimerAdherent($id, $id_demandeur)
+{
+	$con = base();	
+	$sql = "DELETE FROM adherent WHERE id = $id;";
+                try {
+                    $res = $con->exec($sql);
+                } catch (PDOException $e) {
+                    die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
+                }
 }
 
 

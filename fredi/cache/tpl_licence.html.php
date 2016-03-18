@@ -25,15 +25,15 @@
 		echo "<td>".$row['dateNaissance']."</td>";	
 		echo "<td>".$row['nomClub']."</td>";
 
-		echo "<td><a href='modifier.php?num=".$row['numLicence']."'><img src='img/crayon.ico' alt='Photo de montagne' width=24 height=24/></a></td>";	
-		echo "<td><a href='supprimer.php?num=".$row['numLicence']."'><img src='img/poubelle.png' alt='Photo de montagne' width=24 height=24/></a></td>";
+		echo "<td><a href='modifierLicence.php?num=".$row['id']."'><img src='img/crayon.ico' alt='Photo de montagne' width=24 height=24/></a></td>";	
+		echo "<td><a href='supprimerLicence.php?num=".$row['id']."'><img src='img/poubelle.png' alt='Photo de montagne' width=24 height=24/></a></td>";
 		echo "</tr>";
 	}
 ?>
 	
 </table>
 	
-
+<a href="ajouter_licence.php"><button onclick="newBordereau">Ajouter un adherent</button></a>
 
 
 <?php  $this->_tpl_include('footer.html'); ?>
