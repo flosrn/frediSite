@@ -128,8 +128,8 @@ function insertLigneDeFrait($noteDeFrais, $id_demandeur){
 
 	$con = base();	
        
-        $sql = "insert into ligneFrais (date, trajet, km, coutTrajet, coutPeage, coutRepas, coutHebergement, coutTotal, idDemandeur) 
-        values ('".$noteDeFrais->date."', '".$noteDeFrais->trajet."', ".$noteDeFrais->km.", ".$noteDeFrais->coutTrajet.", ".$noteDeFrais->coutPeage.", ".$noteDeFrais->coutRepas.", ".$noteDeFrais->coutHebergement.", ".$noteDeFrais->coutTotal.", ".$id_demandeur.")";
+        $sql = "insert into ligneFrais (date, trajet, km, coutTrajet, coutPeage, coutRepas, coutHebergement, coutTotal, idDemandeur, numBordereau) 
+        values ('".$noteDeFrais->date."', '".$noteDeFrais->trajet."', ".$noteDeFrais->km.", ".$noteDeFrais->coutTrajet.", ".$noteDeFrais->coutPeage.", ".$noteDeFrais->coutRepas.", ".$noteDeFrais->coutHebergement.", ".$noteDeFrais->coutTotal.", ".$id_demandeur.", ".$noteDeFrais->nbBordereau.")";
 
 
         try {
@@ -168,7 +168,7 @@ function lireLigneDeFrais($id_demandeur){
 }
 
 
- function countBoredereau($id_demandeur){
+ function countBordereau($id_demandeur){
  	$con = base();
 
 	$sql = "select max(numBordereau) as nb from lignefrais where idDemandeur='".$id_demandeur."';";
@@ -274,5 +274,19 @@ function modifierAdherent($adherent, $id)
         } catch (PDOException $e) {
             die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
         }
+}
+
+function indemniter($annee)
+{
+	$con = base();
+
+	$sql = "select * from indemnite where Annee='".$annee."';";
+            try {
+                $res = $con->query($sql);
+                $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
+            }
+            return $rows;
 }
 

@@ -19,6 +19,7 @@
 		var $idMotif;
 		var $annee;
 		var $coutTotal;
+		var $nbBordereau;
 	
 		 function __construct($tableau=array()) {
     $this->hydrater($tableau);
@@ -73,6 +74,11 @@
 		{ return $annee; }
 		public function setAnnee( $value)
 		{ $annee = $value; }
+		
+		public function getNbBordereau()
+		{ return $nbBordereau; }
+		public function setNbBordereau( $value)
+		{ $nbBordereau = $value; }
 		
 		
 

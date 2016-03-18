@@ -6,7 +6,8 @@
 if (isset($_SESSION['connecter'])) {
 
   $id_demandeur = $_SESSION['id_demandeur'];
-  $nbBordereau = countBoredereau($id_demandeur);
+  echo $id_demandeur;
+  $nbBordereau = countBordereau($id_demandeur);
   
   for($i=1;$i<=$nbBordereau['nb'];$i++){
    echo '<a href="#">'.$i.'</a>';

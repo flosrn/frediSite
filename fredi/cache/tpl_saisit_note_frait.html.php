@@ -5,24 +5,36 @@
 include ('dto/LigneFrai.class.php');
 include ('dto/Motif.class.php');
 
- $id_demandeur = $_SESSION['connecter'];
- $tarifKm = 10;
+
+
 
 $submit = isset($_POST['submit']);
 if ($submit)
 	{
 		
+		$id_demandeur = $_SESSION['id_demandeur'];
+		$nbBordereau = countBordereau($id_demandeur);
+		print_r($nbBordereau);
+ $dateDeplacement = $_POST['dateDeplacement'];
+ 
+ $date = date_parse($dateDeplacement);
+    $jour = $date['day'];
+    $mois = $date['month'];
+    $annee = $date['year'];
+	
+ $tarifKm = indemniter($annee);
 
      
         $noteDeFrais = new Lignefrai();
         $noteDeFrais->date = $_POST['dateDeplacement'];
         $noteDeFrais->trajet = $_POST['trajet'];
         $noteDeFrais->km = ($_POST['nbKM']);
-        $noteDeFrais->coutTrajet = $_POST['nbKM'] * $tarifKm;
+        $noteDeFrais->coutTrajet = $_POST['nbKM'] * $tarifKm[0]['tarifKilometrique'];
         $noteDeFrais->coutPeage = ($_POST['coutPeage']);
         $noteDeFrais->coutHebergement= ($_POST['coutHebergement']);
         $noteDeFrais->coutRepas = ($_POST['coutRepas']);
         $noteDeFrais->coutTotal = ($_POST['coutTotal']);
+		$noteDeFrais->nbBordereau = $nbBordereau['nb'];
         
 		$motif = new Motif();
 		$motif->libelle = ($_POST['motif']);
