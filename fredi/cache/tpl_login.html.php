@@ -7,8 +7,8 @@
 
         <form id="formulaire" action="login.php" method="post">
             <p>
-                <label for="pseudo" >Pseudo</label><br />
-                <input type="text" value="" name="pseudo" required="required" /><br />
+                <label for="pseudo" >Mail</label><br />
+                <input type="text" value="" name="mail" required="required" /><br />
                 <label for="mdp" >Mot de passe</label><br />
                 <input type="password" value="" name="mdp" required="required" /><br />
 
@@ -20,22 +20,16 @@
         
 
 <?php
-if ((isset($_POST['pseudo'])) && (isset($_POST['mdp']))) {
-	$login = $_POST['pseudo'];
+if ((isset($_POST['mail'])) && (isset($_POST['mdp']))) {
+	$login = $_POST['mail'];
 
 	$password =sha1($_POST['mdp']);
-	//$password =$_POST['mdp'];
-
-	
-
 }
 
 $submit = isset($_POST['submit']);
 
 if ($submit){
 	login($login, $password);
-	
-
 }
 
 

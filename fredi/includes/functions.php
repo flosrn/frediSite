@@ -50,31 +50,27 @@ function login($pseudo, $mdp)
 {
 	$con = base();
 
-	$sql = "select * from demandeur where adresseMail='$pseudo' and motDePasse='$mdp'";
-            try {
-                $res = $con->query($sql);
-                $row = $res->fetch(PDO::FETCH_ASSOC);
-            } catch (PDOException $e) {
-                die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
-            }
-            //on test la saisie
-		
-            if ($pseudo == $row['AdresseMail'] && $mdp == $row['motDePasse']) {
-                $message = "<p>bravo vous etes connecter</p>";
-                $_SESSION['AdresseMail'] = $row['AdresseMail'];
-                $_SESSION['id_demandeur'] = $row['idDemandeur'];
-             
-                //definition du usertype
+	$sql = "select * from demandeur where AdresseMail='$pseudo' and motDePasse='$mdp'";
 
-					$_SESSION['connecter'] = 1 ;
-       
-			} else 
-			{
-				$message = "<p>Login ou mot de passe incorrecte</p>";
-				$_SESSION['connecter'] = 0; 
-			}
-			echo $message;
+  try {
+      $res = $con->query($sql);
+      $row = $res->fetch(PDO::FETCH_ASSOC);
+  } catch (PDOException $e) {
+      die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
+  }
+  //on test la saisie
 
+  if ($pseudo == $row['AdresseMail'] && $mdp == $row['motDePasse']) {
+    $message = "<p>bravo vous etes connecter</p>";
+    $_SESSION['AdresseMail'] = $row['AdresseMail'];
+    $_SESSION['id_demandeur'] = $row['idDemandeur'];
+
+		$_SESSION['connecter'] = 1 ;
+	} else {
+		$message = "<p>Login ou mot de passe incorrecte</p>";
+		$_SESSION['connecter'] = 0; 
+	}
+echo $message;
 }
 
 function inscription ()

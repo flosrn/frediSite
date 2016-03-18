@@ -56,6 +56,12 @@ div#footer {
 	clear: both;
 	border-top: 1px solid #555;
 }
+table {
+	margin : auto;
+}
+td {
+	text-align: center;
+}
 
 
 

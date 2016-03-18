@@ -24,7 +24,6 @@ if (isset($_SESSION['connecter'])) {
 		foreach($rows as $row)
 		{
 			echo "<td>".$row['numLicence']."</td>";	
-
 			echo "<td>".$row['Nom']."</td>";	
 			echo "<td>".$row['Prenom']."</td>";	
 			echo "<td>".$row['dateNaissance']."</td>";	
@@ -34,10 +33,9 @@ if (isset($_SESSION['connecter'])) {
 			echo "<td><a href='supprimerLicence.php?num=".$row['id']."'><img src='img/poubelle.png' alt='Photo de montagne' width=24 height=24/></a></td>";
 			echo "</tr>";
 		}
-	?>
-		
+	?>	
 	</table>
-		
+	<br \>
 	<a href="ajouter_licence.php"><button onclick="newBordereau">Ajouter un adherent</button></a>
 	<?php
 }
