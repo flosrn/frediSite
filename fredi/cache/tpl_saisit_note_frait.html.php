@@ -13,7 +13,7 @@ if ($submit)
 	{
 		
 		$id_demandeur = $_SESSION['id_demandeur'];
-		$nbBordereau = countBordereau($id_demandeur);
+		
 		
  $dateDeplacement = $_POST['dateDeplacement'];
  
@@ -34,7 +34,7 @@ if ($submit)
         $noteDeFrais->coutHebergement= ($_POST['coutHebergement']);
         $noteDeFrais->coutRepas = ($_POST['coutRepas']);
         $noteDeFrais->coutTotal = ($_POST['coutTotal']);
-		$noteDeFrais->nbBordereau = $nbBordereau['nb'];
+		
 		
 		
         

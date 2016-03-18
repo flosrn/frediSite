@@ -124,8 +124,8 @@ function insertLigneDeFrait($noteDeFrais, $id_demandeur){
 
 	$con = base();	
        
-        $sql = "insert into ligneFrais (date, trajet, km, coutTrajet, coutPeage, coutRepas, coutHebergement, coutTotal, idDemandeur, numBordereau) 
-        values ('".$noteDeFrais->date."', '".$noteDeFrais->trajet."', ".$noteDeFrais->km.", ".$noteDeFrais->coutTrajet.", ".$noteDeFrais->coutPeage.", ".$noteDeFrais->coutRepas.", ".$noteDeFrais->coutHebergement.", ".$noteDeFrais->coutTotal.", ".$id_demandeur.", ".$noteDeFrais->nbBordereau.")";
+        $sql = "insert into ligneFrais (date, trajet, km, coutTrajet, coutPeage, coutRepas, coutHebergement, coutTotal, idDemandeur) 
+        values ('".$noteDeFrais->date."', '".$noteDeFrais->trajet."', ".$noteDeFrais->km.", ".$noteDeFrais->coutTrajet.", ".$noteDeFrais->coutPeage.", ".$noteDeFrais->coutRepas.", ".$noteDeFrais->coutHebergement.", ".$noteDeFrais->coutTotal.", ".$id_demandeur.")";
 
 
         try {
@@ -150,10 +150,10 @@ function insertMotif($motif){
 
 }
 
-function lireLigneDeFrais($id_demandeur, $numBordereau){
+function lireLigneDeFrais($id_demandeur){
 	$con = base();
 
-	$sql = "select * from lignefrais a join motif b where a.idMotif = b.idMotif  and idDemandeur='".$id_demandeur."' and numBordereau=".$numBordereau.";";
+	$sql = "select * from lignefrais a join motif b where a.idMotif = b.idMotif  and idDemandeur='".$id_demandeur."';";
             try {
                 $res = $con->query($sql);
                 $rows = $res->fetchAll(PDO::FETCH_ASSOC);
@@ -164,18 +164,7 @@ function lireLigneDeFrais($id_demandeur, $numBordereau){
 }
 
 
- function countBordereau($id_demandeur){
- 	$con = base();
 
-	$sql = "select max(numBordereau) as nb from lignefrais where idDemandeur='".$id_demandeur."';";
-            try {
-                $res = $con->query($sql);
-                $row = $res->fetch(PDO::FETCH_ASSOC);
-            } catch (PDOException $e) {
-                die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
-            }
-            return $row;
-}
 
 function countCoutTotal($id_demandeur){
 	$con = base();

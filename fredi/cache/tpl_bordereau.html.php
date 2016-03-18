@@ -1,18 +1,14 @@
 <?php $this->_tpl_include('header.html'); ?>
 
 <?php
-$numBorderau = $_GET['num'];
 
 //Si l'utiliateur est connecté
 if (isset($_SESSION['connecter'])) {
 
   $id_demandeur = $_SESSION['id_demandeur'];
-  $rows = lireLigneDeFrais($id_demandeur, $numBorderau);
-  $nbBordereau = countBordereau($id_demandeur);
-print_r($rows);
-  for($i=1;$i<=$nbBordereau['nb'];$i++){
-   echo '<a href="Gerer_bordereau.php?num='.$i.'">'.$i.'</a>';
-  }
+  $rows = lireLigneDeFrais($id_demandeur);
+ 
+
   ?>
 
   <div id="bordereau">
