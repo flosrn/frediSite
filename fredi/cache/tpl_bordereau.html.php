@@ -55,6 +55,9 @@ if (isset($_SESSION['connecter'])) {
 
   $total = countCoutTotal($id_demandeur); 
   echo "Le montant total est de : ".$total['total'];  // affiche le total du total du tableau 
+  ?>
+  <p><a href="Saisit_Note_Frait.php">Ajouter</a> une lignes de frais</p>  <!--lien vers la page ajouter -->
+  <?php
 }
 else {
   echo "Veuillez vous connecter pour accéder à la page de gestion  des bordereaux";
@@ -62,7 +65,7 @@ else {
 }
 	
 ?>	
-<p><a href="Saisit_Note_Frait.php">Ajouter</a> une lignes de frais</p>  <!--lien vers la page ajouter -->
+
 		
 
 		
