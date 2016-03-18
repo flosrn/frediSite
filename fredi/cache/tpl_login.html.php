@@ -22,12 +22,12 @@
 <?php
 if ((isset($_POST['pseudo'])) && (isset($_POST['mdp']))) {
 	$login = $_POST['pseudo'];
-<<<<<<< HEAD
+
 	//$password =sha1($_POST['mdp']);
 	$password =$_POST['mdp'];
-=======
-	$password =sha1($_POST['mdp']);
->>>>>>> origin/master
+
+	
+
 }
 
 $submit = isset($_POST['submit']);
