@@ -5,6 +5,7 @@
 include ('dto/Adherent.class.php');
 include ('dto/Club.class.php');
 
+
 $id_demandeur = $_SESSION['id_demandeur'];
 $id = $_GET['num'];
 $rows = mesClub();
@@ -29,7 +30,7 @@ if ($submit)
 
 ?>
 
-<div id="ajoutLicence">
+<div id="modifierLicence">
 
 	<form id="formulaire" action="#" method="post">
             <p>
@@ -55,6 +56,8 @@ if ($submit)
         </form>
 </div>
 
+
+   
 
 
 
