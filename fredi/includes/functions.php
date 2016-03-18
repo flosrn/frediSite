@@ -222,6 +222,20 @@ function mesAdherents($id_demandeur)
             return $rows;
 }
 
+function monAdherent($id_demandeur, $id)
+{
+	$con = base();
+
+	$sql = "select numLicence, a.Nom, Prenom, dateNaissance, c.Nom as nomClub, a.id from adherent a join club c where a.idClub = c.idClub and idDemandeur='".$id_demandeur."' and id=$id;";
+            try {
+                $res = $con->query($sql);
+                $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
+            }
+            return $rows;
+}
+
 
 
 function insertAdherent($adherent, $id_demandeur)
@@ -229,7 +243,7 @@ function insertAdherent($adherent, $id_demandeur)
 	$con = base();	
        
          $sql = "insert into adherent (numLicence, Nom, Prenom, dateNaissance, idClub, idDemandeur) 
-        values (".$adherent->numLicence.", '".$adherent->nom."', '".$adherent->prenom."', ".$adherent->dateNaissance.", ".$adherent->idClub.", ".$id_demandeur.");";
+        values (".$adherent->numLicence.", '".$adherent->nom."', '".$adherent->prenom."', '".$adherent->dateNaissance."', ".$adherent->idClub.", ".$id_demandeur.");";
  		
         try {
             $nb = $con->exec($sql);
@@ -249,5 +263,16 @@ function supprimerAdherent($id, $id_demandeur)
                 }
 }
 
-
+function modifierAdherent($adherent, $id)
+{
+	$con = base();	
+       
+         $sql = "update adherent set numLicence = '".$adherent->numLicence."', Nom = '".$adherent->nom."', Prenom = '".$adherent->prenom."', dateNaissance = '".$adherent->dateNaissance."', idClub = '".$adherent->idClub."' where id=".$id."";
+ 		
+        try {
+            $nb = $con->exec($sql);
+        } catch (PDOException $e) {
+            die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
+        }
+}
 
