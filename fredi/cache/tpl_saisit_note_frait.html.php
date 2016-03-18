@@ -6,6 +6,7 @@ include ('dto/LigneFrai.class.php');
 include ('dto/Motif.class.php');
 
  $id_demandeur = $_SESSION['connecter'];
+ $tarifKm = 10;
 
 $submit = isset($_POST['submit']);
 if ($submit)
@@ -17,7 +18,7 @@ if ($submit)
         $noteDeFrais->date = $_POST['dateDeplacement'];
         $noteDeFrais->trajet = $_POST['trajet'];
         $noteDeFrais->km = ($_POST['nbKM']);
-        $noteDeFrais->coutTrajet = ($_POST['coutTrajet']);
+        $noteDeFrais->coutTrajet = $_POST['nbKM'] * $tarifKm;
         $noteDeFrais->coutPeage = ($_POST['coutPeage']);
         $noteDeFrais->coutHebergement= ($_POST['coutHebergement']);
         $noteDeFrais->coutRepas = ($_POST['coutRepas']);
@@ -48,8 +49,8 @@ if ($submit)
                 <input type="text" value="" name="trajet" required="required" /><br /> 
             	<label for="nbKM" >Nombre de kilometre</label><br />
                 <input type="integer" value="" name="nbKM" required="required" /><br />      
-                <label for="coutTrajet" >Cout trajet</label><br />
-                <input type="integer" value="" name="coutTrajet" required="required" /><br />              
+                <!--<label for="coutTrajet" >Cout trajet</label><br />
+                <input type="integer" value="" name="coutTrajet" required="required" /><br />   -->           
                 </div>
 
                 <div class="formRight">
