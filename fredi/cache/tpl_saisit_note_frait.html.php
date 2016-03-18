@@ -14,7 +14,7 @@ if ($submit)
 		
 		$id_demandeur = $_SESSION['id_demandeur'];
 		$nbBordereau = countBordereau($id_demandeur);
-		print_r($nbBordereau);
+		
  $dateDeplacement = $_POST['dateDeplacement'];
  
  $date = date_parse($dateDeplacement);
@@ -35,13 +35,15 @@ if ($submit)
         $noteDeFrais->coutRepas = ($_POST['coutRepas']);
         $noteDeFrais->coutTotal = ($_POST['coutTotal']);
 		$noteDeFrais->nbBordereau = $nbBordereau['nb'];
+		
+		
         
 		$motif = new Motif();
 		$motif->libelle = ($_POST['motif']);
 
 		insertLigneDeFrait($noteDeFrais, $id_demandeur);
         insertMotif($motif);
-        header('Location: Gerer_bordereau.php');
+        //header('Location: Gerer_bordereau.php');
 		}
 
 ?>

@@ -150,10 +150,10 @@ function insertMotif($motif){
 
 }
 
-function lireLigneDeFrais($id_demandeur){
+function lireLigneDeFrais($id_demandeur, $numBordereau){
 	$con = base();
 
-	$sql = "select * from lignefrais a join motif b where a.idMotif = b.idMotif  and idDemandeur='".$id_demandeur."';";
+	$sql = "select * from lignefrais a join motif b where a.idMotif = b.idMotif  and idDemandeur='".$id_demandeur."' and numBordereau=".$numBordereau.";";
             try {
                 $res = $con->query($sql);
                 $rows = $res->fetchAll(PDO::FETCH_ASSOC);
