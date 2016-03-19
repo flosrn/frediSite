@@ -337,3 +337,49 @@ function modifierMotif($motif, $id)
         }
 }
 
+function modifierMonCompte($demandeur, $id)
+{
+    $con = base();  
+       
+         $sql = "UPDATE demandeur SET Nom = '".$demandeur->nom."', Prenom = '".$demandeur->prenom."', Rue = '".$demandeur->rue."', CP = '".$demandeur->CP."', Ville = '".$demandeur->ville."', AdresseMail = '".$demandeur->mail."', motDePasse = '".$demandeur->mdp."' 
+            where idDemandeur='".$id."'";
+
+        
+        try {
+            $nb = $con->exec($sql);
+        } catch (PDOException $e) {
+            die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
+        }
+}
+
+function monCompte()
+{
+    $con = base();  
+       
+         $sql = "SELECT * 
+                FROM demandeur";
+        
+        try {
+            $res = $con->query($sql);
+            $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
+        }
+        return $rows;
+}
+
+function lireDemandeur($id_demandeur){
+    $con = base();
+
+    $sql = "select * from demandeur  where idDemandeur=".$id_demandeur."";
+            try {
+                $res = $con->query($sql);
+                $rows = $res->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
+            }
+            return $rows;
+}
+
+
+

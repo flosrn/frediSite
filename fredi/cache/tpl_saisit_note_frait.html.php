@@ -5,53 +5,59 @@
 include ('dto/LigneFrai.class.php');
 include ('dto/Motif.class.php');
 
-
-
-
-$submit = isset($_POST['submit']);
-if ($submit)
-	{
-		
-		$id_demandeur = $_SESSION['id_demandeur'];
-		
-		
- $dateDeplacement = $_POST['dateDeplacement'];
- 
- $date = date_parse($dateDeplacement);
-    $jour = $date['day'];
-    $mois = $date['month'];
-    $annee = $date['year'];
-	
- $tarifKm = indemniter($annee);
-
+//Si l'utiliateur est connecté
+if (isset($_SESSION['connecter'])) {
+    $submit = isset($_POST['submit']);
+    if ($submit)
+    	{
+    		
+    		$id_demandeur = $_SESSION['id_demandeur'];
+    		
+    		
+     $dateDeplacement = $_POST['dateDeplacement'];
      
-        $noteDeFrais = new Lignefrai();
-        $noteDeFrais->date = $_POST['dateDeplacement'];
-        $noteDeFrais->trajet = $_POST['trajet'];
-        $noteDeFrais->km = ($_POST['nbKM']);
-        $noteDeFrais->coutTrajet = $_POST['nbKM'] * $tarifKm[0]['tarifKilometrique'];
-        $noteDeFrais->coutPeage = ($_POST['coutPeage']);
-        $noteDeFrais->coutHebergement= ($_POST['coutHebergement']);
-        $noteDeFrais->coutRepas = ($_POST['coutRepas']);
-        $noteDeFrais->coutTotal = $noteDeFrais->coutTrajet + $noteDeFrais->coutPeage + $noteDeFrais->coutHebergement + $noteDeFrais->coutRepas;
-		$noteDeFrais->annee = $annee;
-		
-		
-		
-        
-		$motif = new Motif();
-		$motif->libelle = ($_POST['motif']);
-		insertMotif($motif);
-		
-		$idMotif = idMotif($motif->libelle);
-		$noteDeFrais->idMotif = $idMotif['idMotif'];
-		
-		
-		
-		insertLigneDeFrait($noteDeFrais, $id_demandeur);
-        
-        header('Location: Gerer_bordereau.php');
-		}
+     $date = date_parse($dateDeplacement);
+        $jour = $date['day'];
+        $mois = $date['month'];
+        $annee = $date['year'];
+    	
+     $tarifKm = indemniter($annee);
+
+         
+            $noteDeFrais = new Lignefrai();
+            $noteDeFrais->date = $_POST['dateDeplacement'];
+            $noteDeFrais->trajet = $_POST['trajet'];
+            $noteDeFrais->km = ($_POST['nbKM']);
+            $noteDeFrais->coutTrajet = $_POST['nbKM'] * $tarifKm[0]['tarifKilometrique'];
+            $noteDeFrais->coutPeage = ($_POST['coutPeage']);
+            $noteDeFrais->coutHebergement= ($_POST['coutHebergement']);
+            $noteDeFrais->coutRepas = ($_POST['coutRepas']);
+            $noteDeFrais->coutTotal = $noteDeFrais->coutTrajet + $noteDeFrais->coutPeage + $noteDeFrais->coutHebergement + $noteDeFrais->coutRepas;
+    		$noteDeFrais->annee = $annee;
+    		
+    		
+    		
+            
+    		$motif = new Motif();
+    		$motif->libelle = ($_POST['motif']);
+    		insertMotif($motif);
+    		
+    		$idMotif = idMotif($motif->libelle);
+    		$noteDeFrais->idMotif = $idMotif['idMotif'];
+    		
+    		
+    		
+    		insertLigneDeFrait($noteDeFrais, $id_demandeur);
+
+            
+            
+            header('Location: Gerer_bordereau.php');
+    		}
+        }
+        else {
+            echo "Veuillez vous connecter pour accéder à la page de gestion  des bordereaux";
+            echo "<p><a href='login.php'>Se connecter</a>";
+        }
 
 ?>
 

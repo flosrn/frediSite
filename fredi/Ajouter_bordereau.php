@@ -21,7 +21,4 @@ $template->set_filenames(array(
 
 $template->display('body');
 
-if($_SESSION['connecter'] == 0){
-		header('Location : index.php');
-}
 ?>
