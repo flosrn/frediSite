@@ -9,7 +9,7 @@ include ('dto/Club.class.php');
 $id_demandeur = $_SESSION['id_demandeur'];
 $id = $_GET['num'];
 $rows = mesClub();
-$monAdherent = monAdherent($id_demandeur, $id);
+$monAdherent = monAdherent($id);
 
 
 

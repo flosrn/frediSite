@@ -1,10 +1,10 @@
 <?php $this->_tpl_include('header.html'); ?>
 <?php
 $id_demandeur = $_SESSION['id_demandeur'];
-$idAdherent = $_GET['num'];
+$idLigne = $_GET['num'];
 
-supprimerAdherent($idAdherent);
+supprimerLigneDeFrais($idLigne);
 
-header('location: licence.php');
+header('location: Gerer_bordereau.php');
 ?>
 <?php $this->_tpl_include('footer.html'); ?>

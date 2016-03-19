@@ -17,7 +17,7 @@ page_footer();
 $template->assign_var('U_DOC', "http://area51.phpbb.com/docs/coding-guidelines.html#templating");
 				
 $template->set_filenames(array(
-	'body' => 'modifierLicence.html'));
+	'body' => 'modifierLigneDeFrais.html'));
 
 $template->display('body');
 

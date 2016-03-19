@@ -84,9 +84,7 @@ function inscription ()
 		$CP = $_POST['CP'];
 		$ville = $_POST['ville'];
 	  $mail = $_POST['mail'];
-	  $mdp = $_POST['mdp'];
 	  $mdp = sha1($_POST['mdp']);
-	  //$ligue = $_POST['ligue'];
 	  $test = "select * from demandeur";
 
 	  try {
@@ -124,9 +122,8 @@ function insertLigneDeFrait($noteDeFrais, $id_demandeur){
 
 	$con = base();	
        
-        $sql = "insert into ligneFrais (date, trajet, km, coutTrajet, coutPeage, coutRepas, coutHebergement, coutTotal, idDemandeur) 
-        values ('".$noteDeFrais->date."', '".$noteDeFrais->trajet."', ".$noteDeFrais->km.", ".$noteDeFrais->coutTrajet.", ".$noteDeFrais->coutPeage.", ".$noteDeFrais->coutRepas.", ".$noteDeFrais->coutHebergement.", ".$noteDeFrais->coutTotal.", ".$id_demandeur.")";
-
+        $sql = "insert into ligneFrais (date, trajet, km, coutTrajet, coutPeage, coutRepas, coutHebergement, coutTotal, idDemandeur, Annee, idMotif) 
+        values ('".$noteDeFrais->date."', '".$noteDeFrais->trajet."', ".$noteDeFrais->km.", ".$noteDeFrais->coutTrajet.", ".$noteDeFrais->coutPeage.", ".$noteDeFrais->coutRepas.", ".$noteDeFrais->coutHebergement.", ".$noteDeFrais->coutTotal.", ".$id_demandeur.", ".$noteDeFrais->annee.", ".$noteDeFrais->idMotif.")";
 
         try {
             $nb = $con->exec($sql);
@@ -140,8 +137,6 @@ function insertMotif($motif){
 
 	$sql = "insert into motif (libelle) 
         values ('".$motif->libelle."')";
-
-
         try {
             $nb = $con->exec($sql);
         } catch (PDOException $e) {
@@ -149,6 +144,21 @@ function insertMotif($motif){
         }
 
 }
+
+function idMotif($libelle)
+{
+	$con = base();
+
+	$sql = "select * from motif where libelle='".$libelle."';";
+            try {
+                $res = $con->query($sql);
+                $row = $res->fetch(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
+            }
+            return $row;
+}
+
 
 function lireLigneDeFrais($id_demandeur){
 	$con = base();
@@ -207,11 +217,11 @@ function mesAdherents($id_demandeur)
             return $rows;
 }
 
-function monAdherent($id_demandeur, $id)
+function monAdherent($id)
 {
 	$con = base();
 
-	$sql = "select numLicence, a.Nom, Prenom, dateNaissance, c.Nom as nomClub, a.id from adherent a join club c where a.idClub = c.idClub and idDemandeur='".$id_demandeur."' and id=$id;";
+	$sql = "select numLicence, a.Nom, Prenom, dateNaissance, c.Nom as nomClub, a.id from adherent a join club c where a.idClub = c.idClub  and id=$id;";
             try {
                 $res = $con->query($sql);
                 $rows = $res->fetchAll(PDO::FETCH_ASSOC);
@@ -237,7 +247,7 @@ function insertAdherent($adherent, $id_demandeur)
         }
 }
 
-function supprimerAdherent($id, $id_demandeur)
+function supprimerAdherent($id)
 {
 	$con = base();	
 	$sql = "DELETE FROM adherent WHERE id = $id;";
@@ -273,5 +283,57 @@ function indemniter($annee)
                 die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
             }
             return $rows;
+}
+
+function supprimerLigneDeFrais($idLigne)
+{
+	$con = base();	
+	$sql = "DELETE FROM lignefrais WHERE idLigne = $idLigne;";
+                try {
+                    $res = $con->exec($sql);
+                } catch (PDOException $e) {
+                    die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
+                }
+}
+
+function maLigneDeFrais($id)
+{
+	$con = base();
+
+	$sql = "select * from lignefrais a join motif b where a.idMotif = b.idMotif  and idLigne=$id;";
+            try {
+                $res = $con->query($sql);
+                $row = $res->fetch(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
+            }
+            return $row;
+}
+
+function modifierLigneDeFrais($noteDeFrais, $id)
+{
+	$con = base();	
+       
+         $sql = "update lignefrais set date = '".$noteDeFrais->date."', trajet = '".$noteDeFrais->trajet."', km = '".$noteDeFrais->km."', coutPeage = '".$noteDeFrais->coutPeage."', coutRepas = '".$noteDeFrais->coutRepas."', coutHebergement = '".$noteDeFrais->coutHebergement."', coutTotal = '".$noteDeFrais->coutTotal."', Annee = '".$noteDeFrais->annee."', coutTrajet='".$noteDeFrais->coutTrajet."' where idLigne=".$id."";
+ 		
+        try {
+            $nb = $con->exec($sql);
+        } catch (PDOException $e) {
+            die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
+        }
+}
+
+function modifierMotif($motif, $id)
+{
+
+	$con = base();	
+       
+         $sql = "update motif set libelle = '".$motif->libelle."' where idMotif ='".$id."';";
+ 		
+        try {
+            $nb = $con->exec($sql);
+        } catch (PDOException $e) {
+            die("<p>Erreur lors de la requête SQL : " . $e->getMessage() . "</p>");
+        }
 }
 

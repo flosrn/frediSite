@@ -42,8 +42,8 @@ if (isset($_SESSION['connecter'])) {
       echo "<td>".$row['coutRepas']."</td>";
       echo "<td>".$row['coutHebergement']."</td>";
       echo "<td>".$row['coutTotal']."</td>";
-  	echo "<td><a href=''><img src='img/crayon.ico' alt='Photo de montagne' width=24 height=24/></a></td>";	
-  	echo "<td><a href=''><img src='img/poubelle.png' alt='Photo de montagne' width=24 height=24/></a></td>";
+  	echo "<td><a href='modifierLigneDeFrais.php?num=".$row['idLigne']."'><img src='img/crayon.ico' alt='Photo de montagne' width=24 height=24/></a></td>";	
+  	echo "<td><a href='supprimerLigneDeFrais.php?num=".$row['idLigne']."'><img src='img/poubelle.png' alt='Photo de montagne' width=24 height=24/></a></td>";
 
      echo"</tr>";
   }

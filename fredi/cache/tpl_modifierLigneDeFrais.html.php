@@ -5,6 +5,8 @@
 include ('dto/LigneFrai.class.php');
 include ('dto/Motif.class.php');
 
+$id = $_GET['num'];
+$maLigneDeFrais = maLigneDeFrais($id);
 
 
 
@@ -41,16 +43,14 @@ if ($submit)
         
 		$motif = new Motif();
 		$motif->libelle = ($_POST['motif']);
-		insertMotif($motif);
 		
 		$idMotif = idMotif($motif->libelle);
 		$noteDeFrais->idMotif = $idMotif['idMotif'];
-		
-		
-		
-		insertLigneDeFrait($noteDeFrais, $id_demandeur);
+
+		 modifierMotif($motif, $maLigneDeFrais['idMotif']);
+		 modifierLigneDeFrais($noteDeFrais, $id);
         
-        header('Location: Gerer_bordereau.php');
+         header('Location: Gerer_bordereau.php');
 		}
 
 ?>
@@ -63,23 +63,24 @@ if ($submit)
             <p>
             	<div class="formLeft">
             	<label for="dateDeplacement">Date du déplacement</label><br />
-                <input type="date" value="" name="dateDeplacement" required="required" /><br /> 
+                <input type="date" value="<?php echo $maLigneDeFrais['dateDeplacement']; ?>" name="dateDeplacement" required="required" /><br /> 
                 <label for="motif" >motif</label><br />
-                <input type="text" value="" name="motif" required="required" /><br /> 
+                <input type="text" value="<?php echo $maLigneDeFrais['libelle']; ?>" name="motif" required="required" /><br /> 
                 <label for="trajet">Trajet</label><br />
-                <input type="text" value="" name="trajet" required="required" /><br /> 
+                <input type="text" value="<?php echo $maLigneDeFrais['trajet']; ?>" name="trajet" required="required" /><br /> 
             	<label for="nbKM" >Nombre de kilometre</label><br />
-                <input type="integer" value="" name="nbKM" required="required" /><br />             
+                <input type="integer" value="<?php echo $maLigneDeFrais['km']; ?>" name="nbKM" required="required" /><br />             
                 </div>
 
                 <div class="formRight">
                 <label for="coutPeage">cout péage</label><br />
-                <input type="integer" value="" name="coutPeage" required="required" /><br />
+                <input type="integer" value="<?php echo $maLigneDeFrais['coutPeage']; ?>" name="coutPeage" required="required" /><br />
                 <label for="coutHebergement" >cout hébergement</label><br />
-                <input type="integer" value="" name="coutHebergement" required="required" /><br />
+                <input type="integer" value="<?php echo $maLigneDeFrais['coutHebergement']; ?>" name="coutHebergement" required="required" /><br />
                 <label for="coutRepas" >cout repas</label><br />
-                <input type="integer" value="" name="coutRepas" required="required" /><br />
-                
+                <input type="integer" value="<?php echo $maLigneDeFrais['coutRepas']; ?>" name="coutRepas" required="required" /><br />
+                <label for="coutTotal" >cout total</label><br />
+                <input type="integer" value="<?php echo $maLigneDeFrais['coutTotal']; ?>" name="coutTotal" required="required" /><br />
                 
                 
                 </div>
