@@ -5,9 +5,9 @@
 include ('dto/Adherent.class.php');
 include ('dto/Club.class.php');
 
-//$id_demandeur = $_SESSION['id_demandeur'];
-if (isset($_SESSION['connecter'])) {
 
+if (isset($_SESSION['connecter'])) {
+$id_demandeur = $_SESSION['id_demandeur'];
     $rows = mesClub();
 
 

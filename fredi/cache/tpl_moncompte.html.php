@@ -24,8 +24,9 @@ if ($submit)
         $demandeur->CP = $_POST['CP'];
         $demandeur->ville = ($_POST['ville']);
         $demandeur->mail= ($_POST['mail']);
-        $demandeur->mdp = ($_POST['mdp']);
-        
+        $demandeur->mdp = sha1($_POST['mdp']);
+        //$demandeur->mdp = sha1($de)
+
         
         //$demandeur->idDemandeur = $demandeur['idDemandeur'];
 		
@@ -49,22 +50,22 @@ if ($submit)
         <input type="text" name="nom" value="<?php echo $monCompte['Nom']; ?>" required><br/><br/>
 
         <label for=prenom>Prenom:</label>
-        <input type="text" name="prenom" value="" required><br/><br/>
+        <input type="text" name="prenom" value="<?php echo $monCompte['Prenom']; ?>" required><br/><br/>
         
         <label for=rue>Rue:</label>
-        <input type="text" name="rue" value="" required><br/><br/>
+        <input type="text" name="rue" value="<?php echo $monCompte['Rue']; ?>" required><br/><br/>
 
         <label for=CP>Code Postal:</label>
-        <input type="text" name="CP" value="" required><br/><br/>
+        <input type="text" name="CP" value="<?php echo $monCompte['CP']; ?>" required><br/><br/>
 
         <label for=ville>Ville:</label>
-        <input type="text" name="ville" value="" required><br/><br/>
+        <input type="text" name="ville" value="<?php echo $monCompte['Ville']; ?>" required><br/><br/>
         
         <label for=mail>Adresse mail: </label>
-        <input type="email" name="mail" value="@m2.com" required><br/><br/> 
+        <input type="email" name="mail" value="<?php echo $monCompte['AdresseMail']; ?>" required><br/><br/> 
 
         <label for=mdp>Mot de passe:</label>
-        <input type="password" name="mdp" placeholder="Mot de passe" required><br/><br/>
+        <input type="password" name="mdp" placeholder="Mot de passe" value="" required><br/><br/>
 
         <input type="submit" name="submit" value="Modifier"><!--Bouton submit-->
         <input type="reset" name="reset" value="Réinitialiser"><!---Bouton reset-->

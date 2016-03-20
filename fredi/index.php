@@ -21,9 +21,11 @@ $template->set_filenames(array(
 
 $template->display('body');
 
-$id_demandeur = $_SESSION['id_demandeur'];
-//$lireId = lireDemandeur($id_demandeur);
+if(isset($_SESSION['connecter'])) {
+	$id_demandeur = $_SESSION['id_demandeur'];
+	//$lireId = lireDemandeur($id_demandeur);
 
-echo "<a href='moncompte.php?num='".$id_demandeur."'>Modifier mon profil</a>";
+	echo "<a href='moncompte.php?num=".$id_demandeur."'>Modifier mon profil</a>";
 
+}
 ?>
